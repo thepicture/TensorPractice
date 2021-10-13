@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from backend.lesson_one.digitsumutils.digitsumgetter import get_sum_of_even_digits
+from digitsumgetter import get_sum_of_even_digits
 
 
 class TestGetSumOfEvenDigits(TestCase):
