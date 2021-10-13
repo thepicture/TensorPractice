@@ -7,7 +7,10 @@ from backend.lesson_one.numberguesser.number_guesser import (
 
 class TestNumberGuesser(TestCase):
     def test_get_mean_number(self):
-        """Test for correct guessing of the 73 number in [log2(100)] attempts."""
+        """Test for correct guessing of the 73 number
+        in [log2(100)] attempts.
+
+        """
 
         # Arrange.
         guesser = NumberGuesser(0, 100)
