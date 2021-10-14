@@ -1,5 +1,5 @@
 def get_word_by_age(age):
-    """Get appropriate word for the given age."""
+    """Get the appropriate word for the given age."""
     last_two_digits = age[-2:]
     age = int(last_two_digits)
 

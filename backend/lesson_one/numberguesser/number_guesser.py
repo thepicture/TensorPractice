@@ -17,16 +17,16 @@ class NumberGuesser:
 
     def say_less(self):
         """Notifies the guesser that the number is less
-               than the offered.
+        than the offered.
 
-               """
+        """
         self.sup = self.get_mean_number()
 
     def say_equal(self):
         """Notifies the guesser that the number does equal
-               to the offered.
+        to the offered.
 
-               """
+        """
         print(f'The number is {self.get_mean_number()}')
 
     def ask(self):

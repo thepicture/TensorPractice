@@ -2,7 +2,7 @@ from backend.lesson_one.wordageutils.word_by_age_getter import (
     get_word_by_age
 )
 
-from backend.stringcheckutils.string_if_valid_getter import (
+from backend.lesson_one.stringcheckutils import (
     get_integer_if_valid
 )
 

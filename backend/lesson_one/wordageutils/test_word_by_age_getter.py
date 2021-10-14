@@ -7,7 +7,7 @@ from backend.lesson_one.wordageutils.word_by_age_getter import (
 
 class TestGetWordByAge(TestCase):
     def test_get_word_by_age(self):
-        """Test for test_get_word_by_age."""
+        """Test for age which equals to 11."""
         # Arrange.
         expected = 'лет'
         # Act.

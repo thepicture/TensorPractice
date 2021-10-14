@@ -1,4 +1,4 @@
-from backend.stringcheckutils.string_if_valid_getter import (
+from backend.lesson_one.stringcheckutils import (
     get_integer_if_valid
 )
 
