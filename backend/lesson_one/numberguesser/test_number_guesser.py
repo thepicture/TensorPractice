@@ -14,6 +14,8 @@ class TestNumberGuesser(TestCase):
 
         # Arrange.
         guesser = NumberGuesser(0, 100)
+        expected = 73
+        # Act.
         guesser.ask()
         guesser.say_greater()
         guesser.say_less()
@@ -21,8 +23,6 @@ class TestNumberGuesser(TestCase):
         guesser.say_greater()
         guesser.say_greater()
         guesser.say_less()
-        expected = 73
-        # Act.
         actual = guesser.get_mean_number()
         # Assert.
         TestCase.assertEqual(self, expected, actual)
