@@ -31,6 +31,36 @@
     display: flex;
 }
 
-.word--green {
+.text--green {
     color: limegreen;
+}
+
+.text--black {
+    color: black;
+}
+
+.quote--absolute-flex {
+    position: absolute;
+    display: flex;
+    left: 0;
+    flex-direction: column;
+}
+
+.lemur-fill {
+    object-fit: contain;
+    transform: translate(700px, 100px);
+}
+
+.img-flex {
+    display: flex;
+    align-items: end;
+    z-index: 1;
+}
+
+.gray-gradient {
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 19%, rgba(0,0,0,0.05287464985994398) 82%);
 }
