@@ -10,7 +10,7 @@ Every lesson has one or more packages.
 
 If a package does not have a main.py module, then it is not a part of homework.
 
-Instead, it is a import module for homework packages.
+Instead, it is an import module for homework packages.
 
 # How to run
 To run homework just run main.py module from the specified module.
