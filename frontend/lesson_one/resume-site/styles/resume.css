@@ -1,0 +1,36 @@
+.bg-flex-enabled-true {
+    display: flex;
+    justify-content: flex-end;
+    height: 100vh;
+}
+
+.bg-semi-rectangle {
+    width: 100vh;
+    clip-path: polygon(0 0%, 100% 0%, 100% 100%, 30% 100%);
+}
+
+.bg-semi-rectangle--green-bg {
+    background: limegreen;
+}
+
+.navbar--z-index-1 {
+    z-index: 1;
+}
+
+.fixed-top--padding-left-top {
+    padding-left: 200px;
+    padding-top: 10px;
+}
+
+.logo--x-large {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.logo--flex {
+    display: flex;
+}
+
+.word--green {
+    color: limegreen;
+}
