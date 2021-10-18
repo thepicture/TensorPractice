@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/sora.css">
     <link rel="stylesheet" href="styles/resume.css">
-    <link href="modules/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="modules/fontawesome-web/css/all.css">
+    <link rel="stylesheet" href="modules/wow.js/css/libs/animate.css"/>
 </head>
 <body>
 <div class="d-flex flex-column">
@@ -56,8 +57,9 @@
         <div class="position-absolute gradient--from-white-to-black-radial w-100 height-inherit">
             <div class="d-flex justify-content-center align-items-center position-absolute w-100 height-inherit flex-column">
                 <h6 class="text-white mt-4 text-uppercase fw-bold">LeeMur</h6>
-                <span class="text-white display-4 text-center fw-normal">A gray creature which likes to code.</span>
-                <a href="#greeting-section" class="btn btn-primary mt-4 text-white">Overview of me</a>
+                <span class="text-white display-4 text-center fw-normal animation-fa wow fadeInLeft">A gray creature which likes to code.</span>
+                <a href="#greeting-section" class="btn btn-primary mt-4 text-white wow fadeIn" data-wow-delay="1s">Overview
+                    of me</a>
             </div>
         </div>
     </div>
@@ -91,7 +93,7 @@
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col mb-4">
-                    <span class="display-4">Yes, it is!</span>
+                    <span class="display-4 wow fadeInLeft" data-wow-delay="1s">Yes, it is!</span>
                 </div>
             </div>
             <div class="row justify-content-center text-center mt-4">
@@ -141,7 +143,8 @@
             </div>
             <div class="row justify-content-around align-items-center text-center mt-10">
                 <div class="col-auto">
-                    <a class="d-flex flex-column text-white text-decoration-none nav-link--hover-gray" href="https://github.com/thepicture"
+                    <a class="d-flex flex-column text-white text-decoration-none nav-link--hover-gray"
+                       href="https://github.com/thepicture"
                        target="_blank">
                         <i class="fab fa-github fa-5x"></i>
                         <h3>GitHub</h3>
@@ -156,7 +159,7 @@
                     </a>
                 </div>
                 <div class="col-auto">
-                    <a class="d-flex flex-column text-white text-decoration-none nav-link--hover-gray"
+                    <a class="d-flex flex-column text-white text-decoration-none nav-link--hover-gray animate__animated animate__fadeInLeft"
                        href="mailto:example@example.com?subject=A (REALLY!) private message from the resume site"
                        target="_blank">
                         <i class="fas fa-comment fa-5x"></i>
@@ -169,5 +172,7 @@
 </div>
 <script src="scripts/jquery-3.0.0.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
+<script src="modules/wow.js/dist/wow.min.js"></script>
+<script>new WOW().init();</script>
 </body>
 </html>
