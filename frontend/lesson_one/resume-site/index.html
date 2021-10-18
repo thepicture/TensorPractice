@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ThePicture's page</title>
+    <title>Lee Mur's page</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/sora.css">
     <link rel="stylesheet" href="styles/resume.css">
+    <link href="modules/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> <!--load all styles -->
 </head>
 <body>
 <div class="d-flex flex-column">
-
     <nav class="navbar navbar-expand-sm navbar-light">
-        <a class="navbar-brand font-weight-bold" href="#">ThePicture</a>
+        <a class="navbar-brand font-weight-bold" href="#">LeeMur</a>
         <button class="navbar-toggler"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar__menu"
@@ -24,19 +24,23 @@
         <div class="collapse navbar-collapse" id="navbar__menu">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href=".">Home</a>
+                    <a class="nav-link" href="."><i class="fas fa-home"></i>Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/thepicture" target="_blank">Github</a>
+                    <a class="nav-link" href="https://github.com/thepicture" target="_blank"><i
+                            class="fab fa-github"></i>GitHub</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Contact
+                        <i class="fas fa-envelope"></i>Contact
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="mailto:example@example.com?subject=A business offer from the resume site">Email me</a>
-                        <a class="dropdown-item" href="mailto:example@example.com?subject=PM message from the resume site">PM me</a>
+                        <a class="dropdown-item"
+                           href="mailto:example@example.com?subject=A business offer from the resume site">Email me!!</a>
+                        <a class="dropdown-item"
+                           href="mailto:example@example.com?subject=A (REALLY!) private message from the resume site">PM
+                            me</a>
                     </div>
                 </li>
             </ul>
@@ -48,14 +52,31 @@
              alt="Site logo"/>
         <div class="position-absolute gradient--from-white-to-black-radial w-100 height-inherit">
             <div class="d-flex justify-content-center align-items-center position-absolute w-100 height-inherit flex-column">
-                <h6 class="text-white p-2">THEPICTURE</h6>
-                <h1 class="text-white font-weight-bold text-center p-2">A creature which likes to code.</h1>
-                <button class="btn btn-primary">Overview of me</button>
+                <h6 class="text-white">LeeMur</h6>
+                <span class="text-white p-2 display-4 text-center">A gray creature which likes to code.</span>
+                <a href="#greeting-section" class="btn btn-primary p-2 text-white">Overview of me</a>
             </div>
         </div>
     </div>
-    <script src="scripts/jquery-3.0.0.min.js"></script>
-    <script src="scripts/bootstrap.min.js"></script>
+    <section id="greeting-section">
+        <div class="mt-10"></div>
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col">
+                    <h4 class="text-muted">Who is LeeMur?</h4>
+                </div>
+            </div>
+            <div class="row justify-content-center text-center p-4">
+                <div class="col">
+                    <img src="images/content-lemur-200px.png"
+                         class="rounded-circle"
+                         alt="Site logo"/>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+<script src="scripts/jquery-3.0.0.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
 </body>
 </html>
