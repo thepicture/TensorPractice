@@ -2,19 +2,19 @@
 Doing the tasks given by the tensor teachers
 
 # Package structure
-The main package folders are backend and frontend.
+The main repo's folders are the backend and the frontend.
 
-Every folder has lesson packages with the number given in text format, e.g. lesson_one, lesson_two.
+Every folder has lessons folders, e.g. lesson_one, lesson_two.
 
-Every lesson has one or more packages.
-
-
-If a package in backend folder does not have a main.py module, then it is not a part of homework.
-
-Instead, it is an import module for homework packages.
+Every lesson folder has one or more packages or site pages inside it.
 
 
-If a folder exists in frontend folder, then it is an site or any related to it. To start it run any file with .html extension.
+If a package in backend folder does not have a main.py module, then it is not a part of a homework.
+
+Instead, it is an import module for programs written in python.
+
+
+If a folder exists in the frontend folder, then it is a site or any files related to it. To start it, run any file with .html extension.
 
 # How to run
 To run homework just run main.py module from the specified module.
