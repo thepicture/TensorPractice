@@ -1,35 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>ThePicture's page</title>
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
-        <link rel="stylesheet" href="styles/sora.css">
-        <link rel="stylesheet" href="styles/resume.css">
-    </head>
-    <body>
-    <div class="gray-gradient"></div>
-    <div class="fixed-top fixed-top--padding-left-top">
-            <a class="logo--x-large logo--flex" href="#">
-                <span class="text--black">The</span>
-                <span class="text--green">Picture</span>
-                <div class="menu--flex-end">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </a>
-    </div>
-        <div class="bg-flex-enabled-true">
-            <div class="img-flex">
-                <img src="images/lemur.png" class="lemur-fill">
-            </div>
-            <div class="bg-semi-rectangle bg-semi-rectangle--green-bg"></div>
-        <div>
-        <div class="quote--absolute-flex">
-          <h1>THEPICTURE'S SITE.</h1>
-          <p>A creature which likes to code.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ThePicture's page</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/sora.css">
+    <link rel="stylesheet" href="styles/resume.css">
+</head>
+<body>
+<div class="d-flex flex-column">
+
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler"
+                type="button" data-toggle="collapse"
+                data-target="#navbar__menu"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar__menu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-    </body>
+    </nav>
+    <div class="height-400-px">
+        <img class="img-container w-100 position-absolute"
+             src="images/lemur-bg-400px.jpg"
+             alt="Site logo"/>
+        <div class="d-flex justify-content-center align-items-center position-absolute w-100 height-inherit flex-column">
+            <h1 class="text-white">Hello</h1>
+            <h1 class="text-white">Hello</h1>
+            <h1 class="text-white">Hello</h1>
+        </div>
+    </div>
+</div>
+<script src="scripts/jquery-3.0.0.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
+</div>
+</body>
 </html>
