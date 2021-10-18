@@ -20,11 +20,14 @@
     margin-top: 10rem!important;
 }
 
+.mb-10 {
+    margin-bottom: 10rem!important;
+}
+
 html {
     scroll-behavior: smooth;
 }
 
-/* DEBUG */
-body {
-    height: 9999px;
+.nav-link--hover-gray:hover {
+    color: lightgray !important;
 }
