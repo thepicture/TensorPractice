@@ -1,1 +1,0 @@
-The page is available as https://thepicture.github.io/TensorPractice
