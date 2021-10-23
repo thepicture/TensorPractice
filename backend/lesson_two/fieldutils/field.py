@@ -1,14 +1,17 @@
 class Field:
     def __init__(self, input_list):
-        self._field = dict()
+        """Initializes this field with
+        the given input_list's values.
+        """
+        self._dict = dict()
         for i in range(len(input_list)):
             for j in range(len(input_list[0])):
-                self._field[i, j] = input_list[i][j]
+                self._dict[i, j] = input_list[i][j]
 
     def append(self, x, y, value):
         """Appends a new indices to the field.
         """
-        self._field[x, y] = value
+        self._dict[x, y] = value
 
     def get(self, x, y):
         """Gets the value from the field
@@ -20,8 +23,18 @@ class Field:
         does not exist
         in this Field.
         """
-        if (x, y) not in self._field:
+        if (x, y) not in self._dict:
             raise IndexError('The position '
                              f'of the field at {x}, {y} '
                              'is undefined.')
-        return self._field[x, y]
+        return self._dict[x, y]
+
+    def get_width(self):
+        """"Returns the width of the field.
+        """
+        return max(x for x, y in self._dict.keys()) + 1
+
+    def get_height(self):
+        """Return the height of the field.
+        """
+        return ++max(y for x, y in self._dict.keys()) + 1
