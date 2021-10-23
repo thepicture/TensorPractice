@@ -28,16 +28,18 @@ def main():
     assert field.get_height() < 20
 
     if field.get_width() >= 20:
-        print(MESSAGE_TEMPLATE % ('column',
-                                  MAX_WIDTH,
-                                  field.get_width(),
-                                  )
+        print(MESSAGE_TEMPLATE
+              % ('column',
+                 MAX_WIDTH,
+                 field.get_width(),
+                 )
               )
         return
     if field.get_height() >= 20:
-        print(MESSAGE_TEMPLATE % ('row',
-                                  MAX_HEIGHT,
-                                  field.get_height()),
+        print(MESSAGE_TEMPLATE
+              % ('row',
+                 MAX_HEIGHT,
+                 field.get_height()),
               )
         return
 
@@ -133,10 +135,7 @@ def update_if_3_neighbors(
     """Writes the history if
     the cell has exactly three neighbors.
     """
-    if count_of_neighbors == 3:
-        generation_history[x, y] = 1
-    else:
-        generation_history[x, y] = 0
+    generation_history[x, y] = int(count_of_neighbors == 3)
 
 
 if __name__ == '__main__':
