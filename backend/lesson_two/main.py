@@ -1,5 +1,6 @@
 from backend.lesson_two.fieldutils import neighbor_counter
 from backend.lesson_two.fieldutils.field import Field
+from backend.lesson_two.iofieldutils import field_saver
 from backend.lesson_two.iofieldutils.field_input_parser import (
     parse_file
 )
@@ -8,6 +9,8 @@ MAX_WIDTH = 20
 MAX_HEIGHT = 20
 MESSAGE_TEMPLATE = 'Field %s length must be less than %s, ' \
                    'current is %s'
+
+assert MAX_WIDTH == MAX_HEIGHT
 
 
 def main():
@@ -37,6 +40,7 @@ def calculate_generation(field, generation):
     generation_history = dict()
     print('Generation %s:' % (generation + 1))
     print('Before:')
+    field_saver.save_field(field)
     field.print()
     for x in range(field.get_width()):
         loop_for_y_and_update(field, generation_history, x)
