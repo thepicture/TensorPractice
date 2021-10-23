@@ -9,7 +9,6 @@ def transpose(list_):
         row = list()
         for y in range(list_height):
             row.append(list_[y][x])
-        print()
         result.append(row)
 
     return result

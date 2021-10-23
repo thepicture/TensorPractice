@@ -9,10 +9,11 @@ from backend.lesson_two.iofieldutils.field_input_parser import (
 
 MAX_WIDTH = 20
 MAX_HEIGHT = 20
+RECTANGLES_ARE_ALLOWED = True
 MESSAGE_TEMPLATE = 'Field %s length must be less than %s, ' \
                    'current is %s'
 
-assert MAX_WIDTH == MAX_HEIGHT
+assert RECTANGLES_ARE_ALLOWED
 
 
 def main():
@@ -22,6 +23,9 @@ def main():
 
     field_list, generations_count = parse_file(input_file)
     field = Field(field_list)
+
+    assert field.get_width() < 20
+    assert field.get_height() < 20
 
     if field.get_width() >= 20:
         print(MESSAGE_TEMPLATE % ('column',
@@ -38,20 +42,20 @@ def main():
         return
 
     for generation in range(generations_count):
-        calculate_generation(field, generation)
+        calculate_generation(field, generation, generations_count)
 
 
 def generation_logger(func):
-    """Logs generations in after and
-    before states in the console.
+    """Prints each generation's view after and
+    before changing in the console.
     """
 
     @wraps(func)
-    def wrapper(field, generation, **kwargs):
+    def wrapper(field, generation, *_):
         print('Generation %s:' % (generation + 1))
         print('Before:')
         field.print()
-        func(field, generation, **kwargs)
+        func(field, generation, *_)
         print('After: ')
         field.print()
 
@@ -59,21 +63,24 @@ def generation_logger(func):
 
 
 @generation_logger
-def calculate_generation(field, generation):
+def calculate_generation(field, generation, generations_count):
     """Calculates the current system state
     for the given step.
     """
     generation_history = dict()
-    field_saver.save_field(field)
+
+    if generations_count - generation < 2:
+        field_saver.save_field(field)
+
     for x in range(field.get_width()):
         loop_for_y_and_update(field, generation_history, x)
     for history_x, history_y in generation_history:
-        field.set(history_x,
-                  history_y,
-                  generation_history[
-                      history_x, history_y
-                  ],
-                  )
+        field.set(
+            history_x, history_y,
+            generation_history[
+                history_x, history_y,
+            ],
+        )
 
 
 def loop_for_y_and_update(field, generation_history, x):
@@ -90,12 +97,10 @@ def update_field(field, generation_history, x, y):
     of the current generation.
     """
     count_of_neighbors = neighbor_counter.get_count_of_neighbors(
-        field,
-        x, y,
+        field, x, y,
     )
     generation_history.update(check_generation_conditions(
-        field, x,
-        y, count_of_neighbors,
+        field, x, y, count_of_neighbors,
     ))
 
 
