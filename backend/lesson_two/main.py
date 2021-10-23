@@ -72,7 +72,26 @@ MESSAGE_TEMPLATE = 'Field %s length must be less than %s, ' \
 if __name__ == '__main__':
     field_list, generations_count = parse_file('input.txt')
     field = Field(field_list)
-    for x in range(field.get_width()):
-        for y in range(field.get_height()):
-            print(field.get(x, y), end=' ')
-        print()
+
+    for generation in range(generations_count):
+        generation_history = dict()
+
+        for x in range(field.get_width()):
+            for y in range(field.get_height()):
+                count_of_neighbors = 0
+
+                for neighbor_x in range(x - 1, x + 2):
+                    for neighbor_y in range(y - 1, y + 2):
+                        if neighbor_x == x and neighbor_y == y:
+                            continue
+                        if field.get(neighbor_x, neighbor_y):
+                            count_of_neighbors += 1
+                if field.get(x, y):
+                    if count_of_neighbors == 3:
+                        field.set(x, y, 1)
+                    else:
+                        field.set(x, y, 0)
+                elif count_of_neighbors not in range(2, 4):
+                    field.set(x, y, 0)
+        field.print()
+        print('^ generation', generation + 1)

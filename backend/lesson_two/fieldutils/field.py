@@ -29,17 +29,25 @@ class Field:
                              'is undefined.')
         return self._dict[x, y]
 
+    def set(self, x, y, val):
+        """Sets the value at the given position
+        of this field.
+        """
+        self._dict[x, y] = val
+
     def get_width(self):
         """"Returns the width of the field.
         """
         return max(x for x, y in self._dict.keys()) + 1
 
     def get_height(self):
-        """Return the height of the field.
+        """Returns the height of the field.
         """
-        return ++max(y for x, y in self._dict.keys()) + 1
+        return max(y for x, y in self._dict.keys()) + 1
 
     def print(self):
+        """Prints this field in a readable form.
+        """
         for y in range(self.get_height()):
             for x in range(self.get_width()):
                 print(self.get(x, y), end=' ')
