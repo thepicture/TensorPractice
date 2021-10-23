@@ -1,28 +1,35 @@
-MESSAGE_TEMPLATE = 'Field %s length must be less than 20, ' \
+MAX_WIDTH = 20
+MAX_HEIGHT = 20
+MESSAGE_TEMPLATE = 'Field %s length must be less than %s, ' \
                    'current is %s'
 
 with open('input.txt') as input_file:
     input_list = input_file.read()
     rows_str = input_list.split('\n')
-    if len(rows_str) > 20:
-        print(MESSAGE_TEMPLATE % ('row', len(rows_str)))
+    if len(rows_str) > MAX_WIDTH:
+        print(MESSAGE_TEMPLATE % ('row', MAX_WIDTH,
+                                  len(rows_str)))
     m = int(rows_str[0])
     field_str = rows_str[1:]
-    row_list = list()
+    prev_row_list = list()
     for row in field_str:
         column_list = list()
         for column in row.split(' '):
             column_int = int(column)
             column_list.append(column_int)
-        if len(column_list) > 20:
-            print(MESSAGE_TEMPLATE % ('column', len(rows_str)))
-        row_list.append(column_list)
-        x = len(row_list)
-        y = len(row_list[0])
+        if len(column_list) > MAX_HEIGHT:
+            print(MESSAGE_TEMPLATE % ('column',
+                                      MAX_HEIGHT,
+                                      len(rows_str)))
+        prev_row_list.append(column_list)
+    print(prev_row_list)
+    width = len(prev_row_list[0])
+    height = len(prev_row_list)
     for generation in range(0, m):
-        history_of_generation = dict()
-        for i in range(x):
-            for j in range(y):
+        next_row_list = prev_row_list.copy()
+        for i in range(height):
+            for j in range(width):
+                print(prev_row_list[i][j], end=' ')
                 neighbors_list = [
                     (i, j + 1),
                     (i, j - 1),
@@ -33,27 +40,26 @@ with open('input.txt') as input_file:
                     (i - 1, j + 1),
                     (i - 1, j - 1),
                 ]
-                print(row_list[i][j], end=' ')
                 neighbor_count = 0
-                for neighbor_x, neighbor_y in neighbors_list:
+                for neighbor_y, neighbor_x in neighbors_list:
                     if neighbor_x < 0 or \
+                            neighbor_x >= height or \
                             neighbor_y < 0 or \
-                            neighbor_x >= x or \
-                            neighbor_y >= y:
+                            neighbor_y >= width:
                         continue
-                    if row_list[neighbor_x][neighbor_y]:
+                    if prev_row_list[neighbor_y][neighbor_x]:
                         neighbor_count += 1
-                if not row_list[i][j]:
+                # print('neighbor_count:', neighbor_count, 'for ', i, j)
+                if not prev_row_list[i][j]:
                     if neighbor_count == 3:
-                        history_of_generation[i, j] = 1
+                        next_row_list[i][j] = 1
                 elif neighbor_count not in range(2, 4):
-                    history_of_generation[i, j] = 0
+                    next_row_list[i][j] = 0
             print()
         print('^ generation', generation + 1)
-        for (history_x, history_y), state in history_of_generation.items():
-            row_list[history_x][history_y] = state
+        prev_row_list = next_row_list.copy()
     with open('output.txt', mode='w') as output_file:
-        for i in range(x):
-            for j in range(y):
-                output_file.write(f'{row_list[i][j]} ')
+        for i in range(height):
+            for j in range(width):
+                output_file.write(f'{next_row_list[i][j]} ')
             output_file.write('\n')
