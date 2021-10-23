@@ -1,10 +1,12 @@
 from backend.lesson_two.fieldutils.field_string_parser import (
     parse_field
 )
-from list_transposer import transpose
+from backend.lesson_two.iofieldutils.list_transposer import (
+    transpose
+)
 
 
-def parse(input_file='input.txt'):
+def parse_file(input_file='input.txt'):
     """Parses the given file to the list
     and returns it as a two-dimensioned list
     with access by indices.
