@@ -72,5 +72,7 @@ MESSAGE_TEMPLATE = 'Field %s length must be less than %s, ' \
 if __name__ == '__main__':
     field_list, generations_count = parse_file('input.txt')
     field = Field(field_list)
-    print(field.get_width())
-    print(field.get_height())
+    for x in range(field.get_width()):
+        for y in range(field.get_height()):
+            print(field.get(x, y), end=' ')
+        print()
