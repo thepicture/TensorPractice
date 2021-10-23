@@ -120,17 +120,16 @@ def check_generation_conditions(field, x,
         update_if_3_neighbors(count_of_neighbors, generation_history,
                               x, y,
                               )
-    elif count_of_neighbors in range(2, 4):
-        generation_history[x, y] = 1
     else:
-        generation_history[x, y] = 0
+        generation_history[x, y] = int(count_of_neighbors in range(2, 4))
 
     return generation_history
 
 
-def update_if_3_neighbors(count_of_neighbors, generation_history,
-                          x, y,
-                          ):
+def update_if_3_neighbors(
+        count_of_neighbors, generation_history,
+        x, y,
+):
     """Writes the history if
     the cell has exactly three neighbors.
     """
