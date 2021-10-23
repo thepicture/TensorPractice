@@ -21,7 +21,7 @@ class Field:
         Raises an exception if
         the given pair of coordinates
         does not exist
-        in this Field.
+        in this field.
         """
         if (x, y) not in self._dict:
             raise IndexError('The position '
