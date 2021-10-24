@@ -33,8 +33,7 @@ def main():
         print(MESSAGE_TEMPLATE
               % ('column',
                  MAX_WIDTH,
-                 field.get_width(),
-                 )
+                 field.get_width())
               )
         return
     if field.get_height() >= 20:
@@ -110,8 +109,7 @@ def update_field(field, generation_history, x, y):
     of the current generation.
     """
     count_of_neighbors = neighbor_counter.get_count_of_neighbors(
-        field, x, y,
-    )
+        field, x, y)
 
     generation_dict = check_generation_conditions(
         field, x, y,
@@ -121,8 +119,7 @@ def update_field(field, generation_history, x, y):
 
 
 def check_generation_conditions(field, x,
-                                y, count_of_neighbors,
-                                ):
+                                y, count_of_neighbors):
     """Checks if the given conditions are right:
 
     If the cell is a zero, then if it contains three neighbors,
