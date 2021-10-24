@@ -18,34 +18,34 @@ assert RECTANGLES_ARE_ALLOWED
 assert LIFE_CHANGE_ALL_AT_ONCE
 
 
-def main():
+def main(input_file):
     """The game "Life" main start point.
     """
-    input_file = 'input.txt'
+    input_file = input_file
 
     field_list, generations_count = parse_file(input_file)
     field = Field(field_list)
 
+    if field.get_width() >= 20:
+        print_size_error(field)
+        return
+    if field.get_height() >= 20:
+        print_size_error(field)
+        return
+
     assert field.get_width() < 20
     assert field.get_height() < 20
 
-    if field.get_width() >= 20:
-        print(MESSAGE_TEMPLATE
-              % ('column',
-                 MAX_WIDTH,
-                 field.get_width())
-              )
-        return
-    if field.get_height() >= 20:
-        print(MESSAGE_TEMPLATE
-              % ('row',
-                 MAX_HEIGHT,
-                 field.get_height()),
-              )
-        return
-
     for generation in range(generations_count):
         calculate_generation(field, generation, generations_count)
+
+
+def print_size_error(field):
+    print(MESSAGE_TEMPLATE
+          % ('column',
+             MAX_WIDTH,
+             field.get_width())
+          )
 
 
 def generation_logger(func):
@@ -69,6 +69,7 @@ def generation_logger(func):
     return wrapper
 
 
+@generation_logger
 def calculate_generation(field, generation, generations_count):
     """Calculates the current system state
     for the given step.
@@ -119,7 +120,7 @@ def update_field(field, generation_history, x, y):
 
 
 def check_generation_conditions(field, x,
-                                y, count_of_neighbors):
+                                y, count_of_neighbors) -> dict:
     """Checks if the given conditions are right:
 
     If the cell is a zero, then if it contains three neighbors,
@@ -153,4 +154,4 @@ def update_if_3_neighbors(
 
 
 if __name__ == '__main__':
-    main()
+    main('input.txt')
