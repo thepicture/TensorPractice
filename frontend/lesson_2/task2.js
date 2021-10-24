@@ -83,5 +83,29 @@ function task22(year, month, arr) {
 }
 
 function task23(arr) {
-    return arr;
+    const yearAndMonths = arr
+        .map(function (val) {
+            return {
+                year: val.year,
+                month: val.month
+            };
+        })
+        .reduce(function (acc, val) {
+            let isYearAndMonthAreInArray = !acc.some(function (e) {
+                return JSON.stringify(e) === JSON.stringify(val);
+            });
+
+            if (isYearAndMonthAreInArray) {
+                acc.push(val);
+            }
+
+            return acc;
+        }, []);
+
+    const result = [];
+
+    for (const yearAndMonth of yearAndMonths) {
+        result.push(task22(yearAndMonth.year, yearAndMonth.month, arr));
+    }
+    return result;
 }
