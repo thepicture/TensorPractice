@@ -50,6 +50,10 @@ def main():
 def generation_logger(func):
     """Prints each generation's view after and
     before changing in the console.
+
+    Has sense only if functions change a field
+    such that print of the field
+    will change.
     """
 
     @wraps(func)
@@ -64,14 +68,15 @@ def generation_logger(func):
     return wrapper
 
 
-@generation_logger
 def calculate_generation(field, generation, generations_count):
     """Calculates the current system state
     for the given step.
     """
     generation_history = dict()
 
-    if generations_count - generation < 2:
+    is_last_generation = generations_count - generation < 2
+
+    if is_last_generation:
         field_saver.save_field(field)
 
     for x in range(field.get_width()):
@@ -101,9 +106,12 @@ def update_field(field, generation_history, x, y):
     count_of_neighbors = neighbor_counter.get_count_of_neighbors(
         field, x, y,
     )
-    generation_history.update(check_generation_conditions(
-        field, x, y, count_of_neighbors,
-    ))
+
+    generation_dict = check_generation_conditions(
+        field, x, y,
+        count_of_neighbors)
+
+    generation_history.update(generation_dict)
 
 
 def check_generation_conditions(field, x,
@@ -119,10 +127,12 @@ def check_generation_conditions(field, x,
     generation_history = dict()
 
     if not field.get(x, y):
-        update_if_3_neighbors(count_of_neighbors, generation_history,
-                              x, y,
-                              )
+        update_if_3_neighbors(
+            count_of_neighbors, generation_history,
+            x, y)
     else:
+        if (x, y) in generation_history:
+            print(True)
         generation_history[x, y] = int(count_of_neighbors in range(2, 4))
 
     return generation_history
@@ -130,11 +140,12 @@ def check_generation_conditions(field, x,
 
 def update_if_3_neighbors(
         count_of_neighbors, generation_history,
-        x, y,
-):
+        x, y):
     """Writes the history if
     the cell has exactly three neighbors.
     """
+    if (x, y) in generation_history:
+        print(True)
     generation_history[x, y] = int(count_of_neighbors == 3)
 
 
