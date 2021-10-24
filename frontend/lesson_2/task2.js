@@ -27,13 +27,53 @@ function task21(arr) {
 }
 
 function task22(year, month, arr) {
-    return {
-        date: '2019-01-31',
-        monthBalance: 1234,
-        monthWithdrawal: 33,
-        withdrawalRate: 0.11,
-        rank: 'Золотой'
-    };
+    result = ops
+        .filter(function (val) {
+            return val.year === year &&
+                val.month === month;
+        })
+        .sort(function (prev, next) {
+            return next.amount - prev.amount;
+        })
+        .map(function (val) {
+            if (month < 10) {
+                month = '0' + month;
+            }
+            return {
+                date: `${val.year}.${(val.month < 10
+                    ? `0${val.month}`
+                    : val.month)}.${val.day}`,
+                type: val.type,
+                amount: val.amount,
+            };
+        })
+        .reduce(function (acc, val) {
+            acc.date = val.date;
+            if (val.type === 'replenishment') {
+                acc.monthBalance += val.amount;
+                acc.monthReplenishment += val.amount;
+            }
+            if (val.type === 'withdrawal') {
+                acc.monthBalance -= val.amount;
+                acc.monthWithdrawal += val.amount
+            }
+
+            return acc;
+        }, {monthBalance: 0, monthWithdrawal: 0, monthReplenishment: 0});
+
+    result.withdrawalRate = (result.monthWithdrawal /
+        result.monthReplenishment).toFixed(2);
+
+    if (result.withdrawalRate < .15) {
+        result.rank = 'Золотой';
+    } else if (result.withdrawalRate < .3) {
+        result.rank = 'Серебряный';
+    } else {
+        result.rank = 'Бронзовый';
+    }
+    delete result.monthReplenishment;
+
+    return result;
 }
 
 function task23(arr) {
