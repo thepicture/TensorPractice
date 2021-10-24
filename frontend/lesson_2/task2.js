@@ -27,7 +27,7 @@ function task21(arr) {
 }
 
 function task22(year, month, arr) {
-    result = ops
+    const result = arr
         .filter(function (val) {
             return val.year === year &&
                 val.month === month;
@@ -36,33 +36,39 @@ function task22(year, month, arr) {
             return next.amount - prev.amount;
         })
         .map(function (val) {
-            if (month < 10) {
-                month = '0' + month;
-            }
             return {
-                date: `${val.year}.${(val.month < 10
-                    ? `0${val.month}`
-                    : val.month)}.${val.day}`,
                 type: val.type,
                 amount: val.amount,
             };
         })
         .reduce(function (acc, val) {
-            acc.date = val.date;
             if (val.type === 'replenishment') {
                 acc.monthBalance += val.amount;
                 acc.monthReplenishment += val.amount;
-            }
-            if (val.type === 'withdrawal') {
+            } else if (val.type === 'withdrawal') {
                 acc.monthBalance -= val.amount;
                 acc.monthWithdrawal += val.amount
+            } else {
+                acc.monthBalance -= val.amount
             }
 
             return acc;
         }, {monthBalance: 0, monthWithdrawal: 0, monthReplenishment: 0});
 
     result.withdrawalRate = (result.monthWithdrawal /
-        result.monthReplenishment).toFixed(2);
+        result.monthReplenishment).toFixed(4);
+    const futureDate = new Date(year, month) - 1;
+    const lastDayOfMonthDate = new Date(futureDate);
+
+    let lastDayMonth = lastDayOfMonthDate.getMonth() + 1;
+
+    if (lastDayMonth < 10) {
+        lastDayMonth = `0${lastDayMonth}`;
+    }
+
+    result.date = `${lastDayOfMonthDate.getFullYear()}`
+        + `.${lastDayMonth}`
+        + `.${lastDayOfMonthDate.getDate()}`;
 
     if (result.withdrawalRate < .15) {
         result.rank = 'Золотой';
