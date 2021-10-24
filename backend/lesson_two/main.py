@@ -10,10 +10,12 @@ from backend.lesson_two.iofieldutils.field_input_parser import (
 MAX_WIDTH = 20
 MAX_HEIGHT = 20
 RECTANGLES_ARE_ALLOWED = True
+LIFE_CHANGE_ALL_AT_ONCE = True
 MESSAGE_TEMPLATE = 'Field %s length must be less than %s, ' \
                    'current is %s'
 
 assert RECTANGLES_ARE_ALLOWED
+assert LIFE_CHANGE_ALL_AT_ONCE
 
 
 def main():
@@ -78,9 +80,13 @@ def calculate_generation(field, generation, generations_count):
 
     if is_last_generation:
         field_saver.save_field(field)
-
     for x in range(field.get_width()):
         loop_for_y_and_update(field, generation_history, x)
+
+    update_field_with_history(field, generation_history)
+
+
+def update_field_with_history(field, generation_history):
     for history_x, history_y in generation_history:
         field.set(
             history_x, history_y,
