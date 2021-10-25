@@ -8,7 +8,8 @@ function task21(arr) {
         })
         .reduce(function (acc, val) {
             const payment = acc.find(function (el) {
-                return el.month === val.month;
+                return el.month === val.month &&
+                    el.year === val.year;
             });
 
             if (!payment) {
