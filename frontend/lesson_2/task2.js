@@ -61,15 +61,7 @@ function task22(year, month, arr) {
     const futureDate = new Date(year, month) - 1;
     const lastDayOfMonthDate = new Date(futureDate);
 
-    let lastDayMonth = lastDayOfMonthDate.getMonth() + 1;
-
-    if (lastDayMonth < 10) {
-        lastDayMonth = `0${lastDayMonth}`;
-    }
-
-    result.date = `${lastDayOfMonthDate.getFullYear()}`
-        + `.${lastDayMonth}`
-        + `.${lastDayOfMonthDate.getDate()}`;
+    result.date = lastDayOfMonthDate.toISOString().slice(0, 10);
 
     if (result.withdrawalRate < .15) {
         result.rank = 'Золотой';
