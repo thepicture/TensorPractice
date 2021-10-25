@@ -2,6 +2,7 @@ from functools import wraps
 
 from backend.lesson_two.fieldutils import neighbor_counter
 from backend.lesson_two.fieldutils.field import Field
+from backend.lesson_two.fieldutils.fieldprinter import FieldPrinter
 from backend.lesson_two.iofieldutils import field_saver
 from backend.lesson_two.iofieldutils.field_input_parser import (
     parse_file
@@ -64,10 +65,10 @@ def generation_logger(func):
     def wrapper(field, generation, *_):
         print('Generation %s:' % (generation + 1))
         print('Before:')
-        field.print()
+        FieldPrinter.print(field)
         func(field, generation, *_)
         print('After: ')
-        field.print()
+        FieldPrinter.print(field)
 
     return wrapper
 

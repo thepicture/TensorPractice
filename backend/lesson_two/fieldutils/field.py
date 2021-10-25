@@ -41,10 +41,3 @@ class Field:
     def get_height(self):
         """Returns the height of the field."""
         return max(y for x, y in self._dict.keys()) + 1
-
-    def print(self):
-        """Prints this field in a readable form."""
-        for y in range(self.get_height()):
-            for x in range(self.get_width()):
-                print(self.get(x, y), end=' ')
-            print()
