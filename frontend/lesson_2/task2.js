@@ -28,7 +28,7 @@ function task21(arr) {
 }
 
 function task22(year, month, arr) {
-    const result = arr
+    return arr
         .filter(function (val) {
             return val.year === year &&
                 val.month === month;
@@ -42,7 +42,7 @@ function task22(year, month, arr) {
                 amount: val.amount,
             };
         })
-        .reduce(function (acc, val) {
+        .reduce(function (acc, val, index, currentArray) {
             if (val.type === 'replenishment') {
                 acc.monthBalance += val.amount;
                 acc.monthReplenishment += val.amount;
@@ -53,26 +53,26 @@ function task22(year, month, arr) {
                 acc.monthBalance -= val.amount
             }
 
+            if (index === currentArray.length - 1) {
+                acc.withdrawalRate = (acc.monthWithdrawal /
+                    acc.monthReplenishment).toFixed(4);
+                const futureDate = new Date(year, month) - 1;
+                const lastDayOfMonthDate = new Date(futureDate);
+
+                acc.date = lastDayOfMonthDate.toISOString().slice(0, 10);
+
+                if (acc.withdrawalRate < .15) {
+                    acc.rank = 'Золотой';
+                } else if (acc.withdrawalRate < .3) {
+                    acc.rank = 'Серебряный';
+                } else {
+                    acc.rank = 'Бронзовый';
+                }
+                delete acc.monthReplenishment;
+            }
+
             return acc;
         }, {monthBalance: 0, monthWithdrawal: 0, monthReplenishment: 0});
-
-    result.withdrawalRate = (result.monthWithdrawal /
-        result.monthReplenishment).toFixed(4);
-    const futureDate = new Date(year, month) - 1;
-    const lastDayOfMonthDate = new Date(futureDate);
-
-    result.date = lastDayOfMonthDate.toISOString().slice(0, 10);
-
-    if (result.withdrawalRate < .15) {
-        result.rank = 'Золотой';
-    } else if (result.withdrawalRate < .3) {
-        result.rank = 'Серебряный';
-    } else {
-        result.rank = 'Бронзовый';
-    }
-    delete result.monthReplenishment;
-
-    return result;
 }
 
 function task23(arr) {
