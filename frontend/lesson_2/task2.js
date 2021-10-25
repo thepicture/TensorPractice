@@ -76,29 +76,27 @@ function task22(year, month, arr) {
 }
 
 function task23(arr) {
-    const yearAndMonths = arr
+    return arr
         .map(function (val) {
             return {
                 year: val.year,
-                month: val.month
+                month: val.month,
             };
         })
         .reduce(function (acc, val) {
-            let isYearAndMonthAreInArray = !acc.some(function (e) {
-                return JSON.stringify(e) === JSON.stringify(val);
+            let isYearAndMonthAreNotInArray = !acc.some(function (e) {
+                const parsedDate = new Date(e.date);
+                const currentPayment = {
+                    year: parsedDate.getFullYear(),
+                    month: parsedDate.getMonth() + 1,
+                };
+                return JSON.stringify(currentPayment) === JSON.stringify(val);
             });
 
-            if (isYearAndMonthAreInArray) {
-                acc.push(val);
+            if (isYearAndMonthAreNotInArray) {
+                acc.push(task22(val.year, val.month, arr));
             }
 
             return acc;
         }, []);
-
-    const result = [];
-
-    for (const yearAndMonth of yearAndMonths) {
-        result.push(task22(yearAndMonth.year, yearAndMonth.month, arr));
-    }
-    return result;
 }
