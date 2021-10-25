@@ -53,7 +53,9 @@ function task22(year, month, arr) {
                 acc.monthBalance -= val.amount
             }
 
-            if (index === currentArray.length - 1) {
+            let isLastElementInAccumulator = index === currentArray.length - 1;
+
+            if (isLastElementInAccumulator) {
                 acc.withdrawalRate = (acc.monthWithdrawal /
                     acc.monthReplenishment).toFixed(4);
                 const futureDate = new Date(year, month) - 1;
@@ -84,12 +86,13 @@ function task23(arr) {
             };
         })
         .reduce(function (acc, val) {
-            let areYearAndMonthNotInArray = !acc.some(function (e) {
-                const parsedDate = new Date(e.date);
+            let areYearAndMonthNotInArray = !acc.some(function (paymentOfArray) {
+                const parsedDate = new Date(paymentOfArray.date);
                 const currentPayment = {
                     year: parsedDate.getFullYear(),
                     month: parsedDate.getMonth() + 1,
                 };
+
                 return JSON.stringify(currentPayment) === JSON.stringify(val);
             });
 
@@ -100,7 +103,9 @@ function task23(arr) {
                 if (isFirstPaymentInDateInterval) {
                     currentPayment.totalBalance = 0;
                 } else {
-                    currentPayment.totalBalance = acc[acc.length - 1].totalBalance;
+                    let lastIndex = acc.length - 1;
+
+                    currentPayment.totalBalance = acc[lastIndex].totalBalance;
                 }
                 currentPayment.totalBalance += currentPayment.monthBalance;
 
