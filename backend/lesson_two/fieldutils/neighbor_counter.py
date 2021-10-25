@@ -1,4 +1,5 @@
 def get_count_of_neighbors(field, x, y):
+    """Gets the count of the cell's neighbors."""
     count_of_neighbors = 0
 
     for neighbor_x in range(x - 1, x + 2):

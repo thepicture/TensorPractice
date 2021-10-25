@@ -27,10 +27,10 @@ def main(input_file):
     field = Field(field_list)
 
     if field.get_width() >= 20:
-        print_size_error(field)
+        print_size_error(field, 'column')
         return
     if field.get_height() >= 20:
-        print_size_error(field)
+        print_size_error(field, 'row')
         return
 
     assert field.get_width() < 20
@@ -40,9 +40,12 @@ def main(input_file):
         calculate_generation(field, generation, generations_count)
 
 
-def print_size_error(field):
+def print_size_error(field, object_):
+    """Prints the errors
+    with the given object as a reason.
+    """
     print(MESSAGE_TEMPLATE
-          % ('column',
+          % (object_,
              MAX_WIDTH,
              field.get_width())
           )
@@ -87,6 +90,7 @@ def calculate_generation(field, generation, generations_count):
 
 
 def update_field_with_history(field, generation_history):
+    """Updates the field's history."""
     for history_x, history_y in generation_history:
         field.set(
             history_x, history_y,

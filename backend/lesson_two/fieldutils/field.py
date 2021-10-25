@@ -9,8 +9,7 @@ class Field:
                 self._dict[i, j] = input_list[i][j]
 
     def append(self, x, y, value):
-        """Appends a new indices to the field.
-        """
+        """Appends a new indices to the field."""
         self._dict[x, y] = value
 
     def get(self, x, y):
@@ -36,18 +35,15 @@ class Field:
         self._dict[x, y] = val
 
     def get_width(self):
-        """"Returns the width of the field.
-        """
+        """"Returns the width of the field."""
         return max(x for x, y in self._dict.keys()) + 1
 
     def get_height(self):
-        """Returns the height of the field.
-        """
+        """Returns the height of the field."""
         return max(y for x, y in self._dict.keys()) + 1
 
     def print(self):
-        """Prints this field in a readable form.
-        """
+        """Prints this field in a readable form."""
         for y in range(self.get_height()):
             for x in range(self.get_width()):
                 print(self.get(x, y), end=' ')
