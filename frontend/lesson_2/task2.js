@@ -84,7 +84,7 @@ function task23(arr) {
             };
         })
         .reduce(function (acc, val) {
-            let isYearAndMonthAreNotInArray = !acc.some(function (e) {
+            let areYearAndMonthNotInArray = !acc.some(function (e) {
                 const parsedDate = new Date(e.date);
                 const currentPayment = {
                     year: parsedDate.getFullYear(),
@@ -93,8 +93,18 @@ function task23(arr) {
                 return JSON.stringify(currentPayment) === JSON.stringify(val);
             });
 
-            if (isYearAndMonthAreNotInArray) {
-                acc.push(task22(val.year, val.month, arr));
+            if (areYearAndMonthNotInArray) {
+                const currentPayment = task22(val.year, val.month, arr);
+                const isFirstPaymentInDateInterval = acc.length === 0;
+
+                if (isFirstPaymentInDateInterval) {
+                    currentPayment.totalBalance = 0;
+                } else {
+                    currentPayment.totalBalance = acc[acc.length - 1].totalBalance;
+                }
+                currentPayment.totalBalance += currentPayment.monthBalance;
+
+                acc.push(currentPayment);
             }
 
             return acc;
