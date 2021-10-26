@@ -69,7 +69,6 @@ function task22(year, month, arr) {
 
             if (isNaN(acc.withdrawalRate)) {
                 acc.withdrawalRate = 'Не определено';
-                return acc;
             }
 
             if (acc.withdrawalRate < .15) {
@@ -88,7 +87,7 @@ function task22(year, month, arr) {
         monthBalance: resultArray.monthBalance,
         monthWithdrawal: resultArray.monthWithdrawal,
         withdrawalRate: resultArray.withdrawalRate,
-        rank: resultArray.rank || 'Бронзовый',
+        rank: resultArray.rank,
     };
 }
 
