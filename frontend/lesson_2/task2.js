@@ -1,9 +1,14 @@
+/**
+ * Returns first three payments with the biggest operations count in a month.
+ * @param arr The input array with payments.
+ * @returns {*} An array with first three months with the biggest payments.
+ */
 function task21(arr) {
     return arr
         .map(function (val) {
             return {
                 year: val.year,
-                month: val.month
+                month: val.month,
             };
         })
         .reduce(function (acc, val) {
@@ -13,7 +18,7 @@ function task21(arr) {
             });
 
             if (!payment) {
-                val.totalOps = 1
+                val.totalOps = 1;
                 acc.push(val);
             } else {
                 payment.totalOps++;
@@ -21,14 +26,21 @@ function task21(arr) {
 
             return acc
                 .sort(function (prev, next) {
-                    return next.totalOps - prev.totalOps
+                    return next.totalOps - prev.totalOps;
                 });
         }, [])
         .slice(0, 3);
 }
 
+/**
+ * Returns statistic in the end of a specified month.
+ * @param year The year of payment.
+ * @param month The month of payment.
+ * @param arr The input array with payments.
+ * @returns {*} Statistic in the end of a specified month.
+ */
 function task22(year, month, arr) {
-    return arr
+    const resultArray = arr
         .filter(function (val) {
             return val.year === year &&
                 val.month === month;
@@ -36,13 +48,7 @@ function task22(year, month, arr) {
         .sort(function (prev, next) {
             return next.amount - prev.amount;
         })
-        .map(function (val) {
-            return {
-                type: val.type,
-                amount: val.amount,
-            };
-        })
-        .reduce(function (acc, val, index, currentArray) {
+        .reduce(function (acc, val) {
             if (val.type === 'replenishment') {
                 acc.monthBalance += val.amount;
                 acc.monthReplenishment += val.amount;
@@ -53,32 +59,56 @@ function task22(year, month, arr) {
                 acc.monthBalance -= val.amount
             }
 
-            let isLastElementInAccumulator = index === currentArray.length - 1;
+            acc.withdrawalRate = (acc.monthWithdrawal /
+                acc.monthReplenishment).toFixed(4);
 
-            if (isLastElementInAccumulator) {
-                acc.withdrawalRate = (acc.monthWithdrawal /
-                    acc.monthReplenishment).toFixed(4);
-                const futureDate = new Date(year, month) - 1;
-                const lastDayOfMonthDate = new Date(futureDate);
+            const futureDate = new Date(year, month) - 1;
+            const lastDayOfMonthDate = new Date(futureDate);
 
-                acc.date = lastDayOfMonthDate.toISOString().slice(0, 10);
+            acc.date = lastDayOfMonthDate.toISOString().slice(0, 10);
 
-                if (acc.withdrawalRate < .15) {
-                    acc.rank = 'Золотой';
-                } else if (acc.withdrawalRate < .3) {
-                    acc.rank = 'Серебряный';
-                } else {
-                    acc.rank = 'Бронзовый';
-                }
-                delete acc.monthReplenishment;
+            if (isNaN(acc.withdrawalRate)) {
+                acc.withdrawalRate = 'Не определено';
+                return acc;
+            }
+
+            if (acc.withdrawalRate < .15) {
+                acc.rank = 'Золотой';
+            } else if (acc.withdrawalRate < .3) {
+                acc.rank = 'Серебряный';
+            } else {
+                acc.rank = 'Бронзовый';
             }
 
             return acc;
         }, {monthBalance: 0, monthWithdrawal: 0, monthReplenishment: 0});
+
+    return {
+        date: resultArray.date,
+        monthBalance: resultArray.monthBalance,
+        monthWithdrawal: resultArray.monthWithdrawal,
+        withdrawalRate: resultArray.withdrawalRate,
+        rank: resultArray.rank || 'Бронзовый',
+    };
 }
 
+/**
+ * Returns statistic in the end of all months in an interval.
+ * @param arr The input array with payments.
+ * @returns {*} Statistic in the end of all months in an interval.
+ */
 function task23(arr) {
     return arr
+        .sort(function (prev, next) {
+            const prevDate = new Date(prev.year, prev.month, prev.day).toISOString();
+            const nextDate = new Date(next.year, next.month, next.day).toISOString();
+
+            if (prevDate <= nextDate) {
+                return -1;
+            } else {
+                return 1;
+            }
+        })
         .map(function (val) {
             return {
                 year: val.year,
@@ -86,7 +116,7 @@ function task23(arr) {
             };
         })
         .reduce(function (acc, val) {
-            let areYearAndMonthNotInArray = !acc.some(function (paymentOfArray) {
+            const areYearAndMonthNotInArray = !acc.some(function (paymentOfArray) {
                 const parsedDate = new Date(paymentOfArray.date);
                 const currentPayment = {
                     year: parsedDate.getFullYear(),
@@ -103,7 +133,7 @@ function task23(arr) {
                 if (isFirstPaymentInDateInterval) {
                     currentPayment.totalBalance = 0;
                 } else {
-                    let lastIndex = acc.length - 1;
+                    const lastIndex = acc.length - 1;
 
                     currentPayment.totalBalance = acc[lastIndex].totalBalance;
                 }
