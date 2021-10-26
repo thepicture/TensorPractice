@@ -2,6 +2,7 @@ from functools import wraps
 
 from backend.lesson_two.fieldutils import neighbor_counter
 from backend.lesson_two.fieldutils.field import Field
+from backend.lesson_two.fieldutils.fieldprinter import FieldPrinter
 from backend.lesson_two.iofieldutils import field_saver
 from backend.lesson_two.iofieldutils.field_input_parser import (
     parse_file
@@ -27,10 +28,10 @@ def main(input_file):
     field = Field(field_list)
 
     if field.get_width() >= 20:
-        print_size_error(field)
+        print_size_error(field, 'column')
         return
     if field.get_height() >= 20:
-        print_size_error(field)
+        print_size_error(field, 'row')
         return
 
     assert field.get_width() < 20
@@ -40,9 +41,12 @@ def main(input_file):
         calculate_generation(field, generation, generations_count)
 
 
-def print_size_error(field):
+def print_size_error(field, object_):
+    """Prints the errors
+    with the given object as a reason.
+    """
     print(MESSAGE_TEMPLATE
-          % ('column',
+          % (object_,
              MAX_WIDTH,
              field.get_width())
           )
@@ -61,10 +65,10 @@ def generation_logger(func):
     def wrapper(field, generation, *_):
         print('Generation %s:' % (generation + 1))
         print('Before:')
-        field.print()
+        FieldPrinter.print(field)
         func(field, generation, *_)
         print('After: ')
-        field.print()
+        FieldPrinter.print(field)
 
     return wrapper
 
@@ -87,6 +91,7 @@ def calculate_generation(field, generation, generations_count):
 
 
 def update_field_with_history(field, generation_history):
+    """Updates the field's history."""
     for history_x, history_y in generation_history:
         field.set(
             history_x, history_y,
