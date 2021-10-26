@@ -1,16 +1,24 @@
 /**
+ * Maps the payment to year and month representation.
+ * @returns {function(*): {month: *, year: *}} The payment object with year and month representation.
+ */
+function mapToYearAndMonth() {
+    return function (val) {
+        return {
+            year: val.year,
+            month: val.month,
+        };
+    };
+}
+
+/**
  * Returns first three payments with the biggest operations count in a month.
  * @param arr The input array with payments.
  * @returns {*} An array with first three months with the biggest payments.
  */
 function task21(arr) {
     return arr
-        .map(function (val) {
-            return {
-                year: val.year,
-                month: val.month,
-            };
-        })
+        .map(mapToYearAndMonth())
         .reduce(function (acc, val) {
             const payment = acc.find(function (el) {
                 return el.month === val.month &&
@@ -108,12 +116,7 @@ function task23(arr) {
                 return 1;
             }
         })
-        .map(function (val) {
-            return {
-                year: val.year,
-                month: val.month,
-            };
-        })
+        .map(mapToYearAndMonth())
         .reduce(function (acc, val) {
             const areYearAndMonthNotInArray = !acc.some(function (paymentOfArray) {
                 const parsedDate = new Date(paymentOfArray.date);
